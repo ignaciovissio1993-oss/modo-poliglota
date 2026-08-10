@@ -2,8 +2,16 @@
   "version": 3,
   "pages404": true,
   "caseSensitive": false,
-  "basePath": "",
+  "basePath": "/modo-poliglota",
   "redirects": [
+    {
+      "source": "/modo-poliglota/",
+      "destination": "/modo-poliglota",
+      "basePath": false,
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^/modo-poliglota/$"
+    },
     {
       "source": "/:path+/",
       "destination": "/:path+",
