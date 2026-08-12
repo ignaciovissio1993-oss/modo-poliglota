@@ -25,6 +25,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { pricingPlans, teachers, testimonials, whatsappUrl } from "@/data/site";
+import { languageRoutes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 type LanguageKey = "english" | "vietnamese";
@@ -59,7 +60,7 @@ const languageContent = {
     subtitle: "Con Ignacio",
     marker: "EN",
     sectionId: "ingles",
-    route: "/english",
+    route: languageRoutes.english,
     teacherName: "Ignacio",
     selectorDescription: [
       "Más de 6 años de experiencia enseñando inglés online a estudiantes internacionales.",
@@ -106,7 +107,7 @@ const languageContent = {
     subtitle: "Con Diệp",
     marker: "VN",
     sectionId: "vietnamita",
-    route: "/vietnamese",
+    route: languageRoutes.vietnamese,
     teacherName: "Diep",
     selectorDescription: [
       "Profesora nativa de vietnamita.",

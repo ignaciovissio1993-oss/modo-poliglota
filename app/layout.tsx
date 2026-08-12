@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
-import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
-import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -34,10 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es" suppressHydrationWarning>
       <body className="min-h-screen font-sans antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <FloatingWhatsApp />
+        {children}
       </body>
     </html>
   );

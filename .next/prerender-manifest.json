@@ -26,7 +26,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/vietnamese": {
+    "/r5Tn8Lz3Vm1q": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -39,8 +39,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/vietnamese",
-      "dataRoute": "/vietnamese.rsc",
+      "srcRoute": "/r5Tn8Lz3Vm1q",
+      "dataRoute": "/r5Tn8Lz3Vm1q.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -122,7 +122,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/english": {
+    "/m9Qv4Kp7sN2a": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -135,8 +135,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/english",
-      "dataRoute": "/english.rsc",
+      "srcRoute": "/m9Qv4Kp7sN2a",
+      "dataRoute": "/m9Qv4Kp7sN2a.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",

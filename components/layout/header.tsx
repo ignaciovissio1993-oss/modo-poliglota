@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { site, whatsappUrl } from "@/data/site";
 import { cn } from "@/lib/utils";
 
-export function Header() {
+export function Header({ disableHomeLink = false }: { disableHomeLink?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -26,12 +26,21 @@ export function Header() {
       )}
     >
       <div className="container flex h-20 items-center justify-between gap-4">
-        <Link href="/" className="flex min-w-0 items-center gap-3 font-display text-lg font-bold">
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-soft">
-            <Languages className="h-5 w-5" aria-hidden="true" />
-          </span>
-          <span className="truncate">{site.name}</span>
-        </Link>
+        {disableHomeLink ? (
+          <div className="flex min-w-0 items-center gap-3 font-display text-lg font-bold">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-soft">
+              <Languages className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <span className="truncate">{site.name}</span>
+          </div>
+        ) : (
+          <Link href="/" className="flex min-w-0 items-center gap-3 font-display text-lg font-bold">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-soft">
+              <Languages className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <span className="truncate">{site.name}</span>
+          </Link>
+        )}
 
         <div className="flex shrink-0 items-center justify-end gap-2">
           <ThemeToggle />

@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
+import { SiteShell } from "@/components/layout/site-shell";
 
 export const metadata: Metadata = {
   title: "Política de privacidad",
-  description: "Política de privacidad de Modo Políglota."
+  description: "Política de privacidad de Modo Políglota.",
 };
 
 export default function PrivacyPolicyPage() {
-  return <LegalPage title="Política de privacidad" />;
+  return (
+    <SiteShell>
+      <LegalPage title="Política de privacidad" />
+    </SiteShell>
+  );
 }
 
 function LegalPage({ title }: { title: string }) {

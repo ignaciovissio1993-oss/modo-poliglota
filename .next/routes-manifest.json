@@ -46,10 +46,10 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
-      "page": "/english",
-      "regex": "^/english(?:/)?$",
+      "page": "/m9Qv4Kp7sN2a",
+      "regex": "^/m9Qv4Kp7sN2a(?:/)?$",
       "routeKeys": {},
-      "namedRegex": "^/english(?:/)?$"
+      "namedRegex": "^/m9Qv4Kp7sN2a(?:/)?$"
     },
     {
       "page": "/privacy-policy",
@@ -58,16 +58,16 @@
       "namedRegex": "^/privacy\\-policy(?:/)?$"
     },
     {
+      "page": "/r5Tn8Lz3Vm1q",
+      "regex": "^/r5Tn8Lz3Vm1q(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/r5Tn8Lz3Vm1q(?:/)?$"
+    },
+    {
       "page": "/terms",
       "regex": "^/terms(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/terms(?:/)?$"
-    },
-    {
-      "page": "/vietnamese",
-      "regex": "^/vietnamese(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/vietnamese(?:/)?$"
     }
   ],
   "dataRoutes": [],
