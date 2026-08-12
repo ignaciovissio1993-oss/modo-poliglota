@@ -14,7 +14,7 @@ import {
   Tent,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import englishCardImage from "../../En.png";
 import vietnameseCardImage from "../../Vi.png";
 import { Reveal } from "@/components/motion/reveal";
@@ -34,8 +34,8 @@ type LanguageContent = {
   title: string;
   subtitle: string;
   marker: string;
-  hash: string;
   sectionId: string;
+  route: string;
   teacherName: string;
   selectorDescription: string[];
   heroBadge: string;
@@ -58,8 +58,8 @@ const languageContent = {
     title: "INGLÉS",
     subtitle: "Con Ignacio",
     marker: "EN",
-    hash: "ingles",
     sectionId: "ingles",
+    route: "/english",
     teacherName: "Ignacio",
     selectorDescription: [
       "Más de 6 años de experiencia enseñando inglés online a estudiantes internacionales.",
@@ -105,8 +105,8 @@ const languageContent = {
     title: "VIETNAMITA",
     subtitle: "Con Diệp",
     marker: "VN",
-    hash: "vietnamita",
     sectionId: "vietnamita",
+    route: "/vietnamese",
     teacherName: "Diep",
     selectorDescription: [
       "Profesora nativa de vietnamita.",
@@ -152,61 +152,14 @@ const languageContent = {
 const selectorOrder: LanguageKey[] = ["english", "vietnamese"];
 
 export function LanguageHome() {
-  const [highlightedLanguage, setHighlightedLanguage] = useState<LanguageKey | null>(null);
-  const highlightTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const scrollToHash = () => {
-      const hash = window.location.hash.replace("#", "");
-      const language = selectorOrder.find((key) => languageContent[key].hash === hash);
-
-      if (!language) {
-        return;
-      }
-
-      window.requestAnimationFrame(() => {
-        document
-          .getElementById(languageContent[language].sectionId)
-          ?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    };
-
-    scrollToHash();
-    window.addEventListener("hashchange", scrollToHash);
-
-    return () => {
-      if (highlightTimeout.current) {
-        clearTimeout(highlightTimeout.current);
-      }
-      window.removeEventListener("hashchange", scrollToHash);
-    };
-  }, []);
-
-  const selectLanguage = (language: LanguageKey) => {
-    const content = languageContent[language];
-    const target = document.getElementById(content.sectionId);
-
-    window.history.pushState(null, "", `#${content.hash}`);
-    setHighlightedLanguage(language);
-
-    if (highlightTimeout.current) {
-      clearTimeout(highlightTimeout.current);
-    }
-
-    highlightTimeout.current = setTimeout(() => setHighlightedLanguage(null), 1800);
-    target?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  return (
-    <>
-      <LanguageSelectionHero onSelect={selectLanguage} />
-      <LanguageLanding language="english" highlighted={highlightedLanguage === "english"} />
-      <LanguageLanding language="vietnamese" highlighted={highlightedLanguage === "vietnamese"} />
-    </>
-  );
+  return <LanguageSelectionHero />;
 }
 
-function LanguageSelectionHero({ onSelect }: { onSelect: (language: LanguageKey) => void }) {
+export function LanguagePage({ language }: { language: LanguageKey }) {
+  return <LanguageLanding language={language} />;
+}
+
+function LanguageSelectionHero() {
   return (
     <section className="overflow-hidden pt-24 sm:pt-28 lg:min-h-screen lg:pt-32">
       <div className="container flex min-h-[calc(100vh-6rem)] flex-col justify-center gap-8 pb-12 sm:pb-16 lg:pb-20">
@@ -228,7 +181,6 @@ function LanguageSelectionHero({ onSelect }: { onSelect: (language: LanguageKey)
             <LanguageSelectorCard
               key={language}
               language={language}
-              onSelect={onSelect}
             />
           ))}
         </div>
@@ -239,10 +191,8 @@ function LanguageSelectionHero({ onSelect }: { onSelect: (language: LanguageKey)
 
 function LanguageSelectorCard({
   language,
-  onSelect,
 }: {
   language: LanguageKey;
-  onSelect: (language: LanguageKey) => void;
 }) {
   const content = languageContent[language];
   const isEnglish = language === "english";
@@ -251,11 +201,12 @@ function LanguageSelectorCard({
 
   return (
     <div className="h-full w-full min-w-0">
-      <motion.button
-        type="button"
-        onClick={() => onSelect(language)}
+      <motion.div
         whileHover={{ y: -6 }}
         whileTap={{ scale: 0.975 }}
+      >
+      <Link
+        href={content.route}
         className={cn(
           "group relative flex h-full min-h-[430px] w-full min-w-0 cursor-pointer flex-col overflow-hidden rounded-3xl border p-5 text-left shadow-soft transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-8",
           isEnglish
@@ -340,7 +291,8 @@ function LanguageSelectorCard({
           Ver clases
           <ChevronRight className="h-4 w-4" aria-hidden="true" />
         </span>
-      </motion.button>
+      </Link>
+      </motion.div>
     </div>
   );
 }
@@ -368,7 +320,7 @@ function LanguageCardIllustration({ language }: { language: LanguageKey }) {
   );
 }
 
-function LanguageLanding({ language, highlighted }: { language: LanguageKey; highlighted: boolean }) {
+function LanguageLanding({ language }: { language: LanguageKey }) {
   const content = languageContent[language];
   const teacher = teachers.find((item) => item.name === content.teacherName) ?? teachers[0];
   const plan = pricingPlans.find((item) => item.name === content.pricingName) ?? pricingPlans[0];
@@ -376,10 +328,7 @@ function LanguageLanding({ language, highlighted }: { language: LanguageKey; hig
   return (
     <div
       id={content.sectionId}
-      className={cn(
-        "scroll-mt-24 transition-colors duration-700",
-        highlighted && (language === "english" ? "bg-sky-500/5" : "bg-red-500/5")
-      )}
+      className="scroll-mt-24"
     >
       <HeroBlock content={content} teacher={teacher} language={language} />
       <WhyBlock content={content} />

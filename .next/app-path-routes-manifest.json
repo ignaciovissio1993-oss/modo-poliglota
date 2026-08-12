@@ -1,6 +1,8 @@
 {
   "/_not-found/page": "/_not-found",
+  "/english/page": "/english",
   "/page": "/",
+  "/vietnamese/page": "/vietnamese",
   "/privacy-policy/page": "/privacy-policy",
   "/terms/page": "/terms"
 }
